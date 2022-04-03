@@ -112,80 +112,90 @@ def secondmenu(message):
 
 
 def knowlege(message):
+    if message.text != 'Отмена':
+        mycursor = mydb.cursor()
+        mycursor.execute(f"SELECT Count(ID) FROM `says` ")
+        currentid = int(mycursor.fetchone()[0]) + 1
 
-    mycursor = mydb.cursor()
-    mycursor.execute(f"SELECT Count(ID) FROM `says` ")
-    currentid = int(mycursor.fetchone()[0]) + 1
-
-    sql = "INSERT INTO says (ID, TEXT) VALUES (%s, %s)"
-    val = (currentid, message.text)
-    mycursor.execute(sql, val)
-    mydb.commit()
-    bot.send_message (message.chat.id, f'''Добавил в базу, ID записи = {currentid}''', reply_markup= main())
-    mycursor.close()
+        sql = "INSERT INTO says (ID, TEXT) VALUES (%s, %s)"
+        val = (currentid, message.text)
+        mycursor.execute(sql, val)
+        mydb.commit()
+        bot.send_message (message.chat.id, f'''Добавил в базу, ID записи = {currentid}''', reply_markup= main())
+        mycursor.close()
+    else:
+        bot.send_message (message.chat.id, 'Отмена', reply_markup= main())
 
 
 def practice(message):
+    if message.text != 'Отмена':
+        mycursor = mydb.cursor()
+        mycursor.execute(f"SELECT Count(ID_practice) FROM `practice` ")
+        currentid = int(mycursor.fetchone()[0]) + 1
 
-    mycursor = mydb.cursor()
-    mycursor.execute(f"SELECT Count(ID_practice) FROM `practice` ")
-    currentid = int(mycursor.fetchone()[0]) + 1
+        sql = "INSERT INTO practice (ID_practice, Text_practice) VALUES (%s, %s)"
+        val = (currentid, message.text)
 
-    sql = "INSERT INTO practice (ID_practice, Text_practice) VALUES (%s, %s)"
-    val = (currentid, message.text)
+        mycursor.execute(sql, val)
+        mydb.commit()
 
-    mycursor.execute(sql, val)
-    mydb.commit()
-
-    bot.send_message (message.chat.id, f'''Добавил в базу, ID записи = {currentid}''', reply_markup= main())
-    mycursor.close()
-
+        bot.send_message (message.chat.id, f'''Добавил в базу, ID записи = {currentid}''', reply_markup= main())
+        mycursor.close()
+    else:
+        bot.send_message (message.chat.id, 'Отмена', reply_markup= main())
 
 def power(message):
+    if message.text != 'Отмена':
+        mycursor = mydb.cursor()
+        mycursor.execute(f"SELECT Count(ID_power) FROM `power` ")
+        currentid = int(mycursor.fetchone()[0]) + 1
 
-    mycursor = mydb.cursor()
-    mycursor.execute(f"SELECT Count(ID_power) FROM `power` ")
-    currentid = int(mycursor.fetchone()[0]) + 1
+        sql = "INSERT INTO power (ID_power, TEXT_power) VALUES (%s, %s)"
+        val = (currentid, message.text)
 
-    sql = "INSERT INTO power (ID_power, TEXT_power) VALUES (%s, %s)"
-    val = (currentid, message.text)
+        mycursor.execute(sql, val)
+        mydb.commit()
 
-    mycursor.execute(sql, val)
-    mydb.commit()
-
-    bot.send_message (message.chat.id, f'''Добавил в базу, ID записи = {currentid}''', reply_markup= main())
-    mycursor.close()
-
+        bot.send_message (message.chat.id, f'''Добавил в базу, ID записи = {currentid}''', reply_markup= main())
+        mycursor.close()
+    else:
+        bot.send_message (message.chat.id, 'Отмена', reply_markup= main())
 
 
 def knowlegedel(message):
-    mycursor = mydb.cursor()
-    deleteid = int(message.text)
-    mycursor.execute(f'''DELETE FROM says WHERE ID = {deleteid}''')
-    bot.send_message (message.chat.id, f'''Удалил ID {deleteid} из базы''', reply_markup= main())
-    mycursor.close()
-    mydb.commit()
+    if message.text != 'Отмена':
+        mycursor = mydb.cursor()
+        deleteid = int(message.text)
+        mycursor.execute(f'''DELETE FROM says WHERE ID = {deleteid}''')
+        bot.send_message (message.chat.id, f'''Удалил ID {deleteid} из базы''', reply_markup= main())
+        mycursor.close()
+        mydb.commit()
+    else:
+        bot.send_message (message.chat.id, 'Отмена', reply_markup= main())
 
 
 def practicedel(message):
-
-    mycursor = mydb.cursor()
-    deleteid = int(message.text)
-    mycursor.execute(f'''DELETE FROM practice WHERE ID_practice = {deleteid}''')
-    bot.send_message (message.chat.id, f'''Удалил ID {deleteid} из базы''', reply_markup= main())
-    mycursor.close()
-    mydb.commit()
-
+    if message.text != 'Отмена':
+        mycursor = mydb.cursor()
+        deleteid = int(message.text)
+        mycursor.execute(f'''DELETE FROM practice WHERE ID_practice = {deleteid}''')
+        bot.send_message (message.chat.id, f'''Удалил ID {deleteid} из базы''', reply_markup= main())
+        mycursor.close()
+        mydb.commit()
+    else:
+        bot.send_message (message.chat.id, 'Отмена', reply_markup= main())
 
 
 def powerdel(message):
-
-    mycursor = mydb.cursor()
-    deleteid = int(message.text)
-    mycursor.execute(f'''DELETE FROM power WHERE ID_power = {deleteid}''')
-    bot.send_message (message.chat.id, f'''Удалил ID {deleteid} из базы''', reply_markup= main())
-    mycursor.close()
-    mydb.commit()
+    if message.text != 'Отмена':
+        mycursor = mydb.cursor()
+        deleteid = int(message.text)
+        mycursor.execute(f'''DELETE FROM power WHERE ID_power = {deleteid}''')
+        bot.send_message (message.chat.id, f'''Удалил ID {deleteid} из базы''', reply_markup= main())
+        mycursor.close()
+        mydb.commit()
+    else:
+        bot.send_message (message.chat.id, 'Отмена', reply_markup= main())
 
 
 
