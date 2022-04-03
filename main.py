@@ -131,7 +131,7 @@ def practice(message):
     mycursor.execute(f"SELECT Count(ID_practice) FROM `practice` ")
     currentid = int(mycursor.fetchone()[0]) + 1
 
-    sql = "INSERT INTO power (ID_practice, Text_practice) VALUES (%s, %s)"
+    sql = "INSERT INTO practice (ID_practice, Text_practice) VALUES (%s, %s)"
     val = (currentid, message.text)
 
     mycursor.execute(sql, val)
